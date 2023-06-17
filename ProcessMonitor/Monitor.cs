@@ -4,15 +4,15 @@ using System.Threading;
 
 namespace ProcessMonitor
 {
-    class ProcessMonitor
+    class Monitor
     {
-        //const string ArgsUsageMsg = "Usage: monitor.exe <process name> <maximum lifetime (minutes)> <monitoring frequency (minutes)>";
+        const string ArgsUsageMsg = "Usage: monitor.exe <process name> <maximum lifetime (minutes)> <monitoring frequency (minutes)>";
 
         static void Main(string[] args)
         {
             if (args.Length < 3)
             {
-                Console.WriteLine("Usage: monitor.exe <process name> <maximum lifetime (minutes)> <monitoring frequency (minutes)>");
+                Console.WriteLine(ArgsUsageMsg);
                 return;
             }
 
