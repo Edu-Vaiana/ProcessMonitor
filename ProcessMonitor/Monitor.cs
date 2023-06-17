@@ -16,10 +16,9 @@ namespace ProcessMonitor
                 return;
             }
 
-            string processName = args[0];
-            // Todo: accept decimals
-            int maxLifetime = Convert.ToInt32(args[1]);
-            int monitoringFrequency = Convert.ToInt32(args[2]);
+            var processName = args[0];
+            var maxLifetime = Convert.ToDouble(args[1]);
+            var monitoringFrequency = Convert.ToInt32(args[2]);
 
             Console.WriteLine("Monitoring process: " + processName);
             Console.WriteLine("Max Lifetime: " + maxLifetime + " minutes");
