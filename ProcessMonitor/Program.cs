@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Threading;
 
 namespace ProcessMonitor
 {
     class Program
     {
         const string ArgsUsageMsg = "Usage: monitor.exe <process name> <maximum lifetime (minutes)> <monitoring frequency (minutes)>";
+        private static readonly ConsoleWrapper _consoleWrapper = new ConsoleWrapper();
 
         static void Main(string[] args)
         {
@@ -18,35 +17,16 @@ namespace ProcessMonitor
 
             var processName = args[0];
             var maxLifetime = Convert.ToDouble(args[1]);
-            var monitoringFrequency = Convert.ToInt32(args[2]);
+            var monitoringFrequency = Convert.ToDouble(args[2]);
+
+            var processMonitor = new Monitor(_consoleWrapper);
 
             Console.WriteLine("Monitoring process: " + processName);
             Console.WriteLine("Max Lifetime: " + maxLifetime + " minutes");
             Console.WriteLine("Monitoring Frequency: " + monitoringFrequency + " minutes");
             Console.WriteLine("Press 'q' to stop monitoring.");
 
-            while (true)
-            {
-                // Check if the 'q' key is pressed
-                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Q)
-                    break;
-
-                // Check if the process is running
-                Process[] processes = Process.GetProcessesByName(processName);
-                foreach (Process process in processes)
-                {
-                    TimeSpan processLifetime = DateTime.Now - process.StartTime;
-                    if (processLifetime.TotalMinutes > maxLifetime)
-                    {
-                        // Kill the process
-                        Console.WriteLine("Killing process: " + process.ProcessName);
-                        process.Kill();
-                    }
-                }
-
-                // Sleep for the monitoring frequency
-                Thread.Sleep(monitoringFrequency * 60000);
-            }
+            processMonitor.Start(processName, maxLifetime, monitoringFrequency);
         }
     }
 }

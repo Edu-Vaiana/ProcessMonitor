@@ -2,7 +2,7 @@
   "profiles": {
     "ProcessMonitor": {
       "commandName": "Project",
-      "commandLineArgs": "notepad 2 1"
+      "commandLineArgs": "notepad 0.02 0.01"
     }
   }
 }
