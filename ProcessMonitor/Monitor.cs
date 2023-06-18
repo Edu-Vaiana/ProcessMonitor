@@ -16,12 +16,9 @@ namespace ProcessMonitor
 
         public void Start(string processName, double maxLifetime, double monitoringFrequency)
         {
-            while (true)
+            // Check if the 'q' key is pressed
+            while (!_consoleWrapper.KeyAvailable() && _consoleWrapper.ReadKey() != ConsoleKey.Q)
             {
-                // Check if the 'q' key is pressed
-                if (_consoleWrapper.KeyAvailable() && _consoleWrapper.ReadKey() == ConsoleKey.Q)
-                    break;
-
                 // Check if the process is running
                 Process[] processes = Process.GetProcessesByName(processName);
                 foreach (Process process in processes)
