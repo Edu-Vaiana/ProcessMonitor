@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace ProcessMonitor
 {
-    class Monitor
+    class Program
     {
         const string ArgsUsageMsg = "Usage: monitor.exe <process name> <maximum lifetime (minutes)> <monitoring frequency (minutes)>";
 
